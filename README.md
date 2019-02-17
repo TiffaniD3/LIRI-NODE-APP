@@ -11,7 +11,7 @@ Commands
 
 Instructions
 ------------
-To run the application simply navigate to the liri.js file in terminal. Then run -- `node liri.js <command> <userinput>`.
+To run the application, simply navigate to the liri.js file in terminal. Then run -- `node liri.js <command> <userinput>`.
 
 API's Used
 ----------
