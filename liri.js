@@ -6,6 +6,7 @@ let Spotify = require("node-spotify-api");
 let spotify = new Spotify(keys.Spotify);
 let figlet = require("figlet");
 let chalk = require("chalk");
+let fs = require("fs");
 let log = console.log;
 
 let command = process.argv[2];
@@ -25,6 +26,10 @@ function heyLiri() {
 
         case "concert-this":
         bandsInTown(param);
+        break;
+
+        case "do-what-it-says":
+        doIt();
         break;
 
         default:
@@ -92,7 +97,7 @@ function omdb(param) {
             return;
     }
     log(chalk.red(data));
-    log(chalk.red("===================================="));
+    log(chalk.red("==========================="));
 });
 
     // Data pulled from OMDB
@@ -125,6 +130,7 @@ function bandsInTown(param) {
         bandSearch = param;
     }
 
+    // BandsInTown Header
     let figFont = "BandsInTown"
     figlet(figFont, function(err, data){
         if(err){
@@ -132,16 +138,20 @@ function bandsInTown(param) {
             return;
         }
         log(chalk.blue(data));
-    })
+        log(chalk.blue("=============================================================="));
+    });
 
+    // Data pulled from BandsInTown
     let queryURL = "https://rest.bandsintown.com/artists/" + bandSearch + "/events?app_id=codingbootcamp";
     axios.get(queryURL)
     .then(function(response){
-        for (var i = 0; i < response.data.length; i++){    
-        log("Artist: " + response.data[i].lineup);
+        for (var i = 0; i < response.data.length; i++){  
+        log("Artist: " + bandSearch);      
+        log("Lineup: " + response.data[i].lineup);
         log("Venue: " + response.data[i].venue.name);
-        log("Location: " + response.data[i].venue.city);
-        log(moment("Date: " + response.data[i].datetime)).format("MM/DD/YYYY");
+        log("Location: " + response.data[i].venue.city + ", " + response.data[i].venue.country);
+        log("Date: " + moment(response.data[i].datetime).format("MM/DD/YYYY"));
+        log(chalk.blue("===================================="));
 
     }
 })
@@ -149,7 +159,25 @@ function bandsInTown(param) {
         log("I'm sorry, I wasn't able to find that. Here's why: " + error);
     });
 
-} 
+};
+
+// Do-What-it-says function is not working
+function doIt() {
+
+    fs.readFile("random.txt", "utf8", function(error, data){
+        if(error) {
+            log("I'm sorry. I had trouble reading that. Here's why: " + error);
+        };
+        
+        let dataArr = data.split(", ");
+        param = dataArr[1]; 
+
+        if (dataArr[0] === "spotify-this-song") {
+            spotifySong(param);
+        };
+        
+    });
+};
 
 
 
