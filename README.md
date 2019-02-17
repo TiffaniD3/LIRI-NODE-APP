@@ -28,4 +28,14 @@ Packages Used
 * moment
 * fs
 
+Spotify Command
+================
+![](gifs/spotify.gif)
 
+OMdB Command
+=============
+![](gifs/omdb.gif)
+
+BandsInTown Command
+====================
+![](gifs/bandsintown.gif)
