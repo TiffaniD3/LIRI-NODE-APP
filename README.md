@@ -38,4 +38,4 @@ OMdB Command
 
 BandsInTown Command
 ====================
-![](gifs/bandsintown.gif)
+![](gifs/bandintown.gif)
