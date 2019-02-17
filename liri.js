@@ -1,7 +1,7 @@
 require("dotenv").config();
 let axios = require("axios");
-let moment = require("moment");
-let keys = require("./keys.js");
+const moment = require("moment");
+const keys = require("./keys.js");
 let Spotify = require("node-spotify-api");
 let spotify = new Spotify(keys.Spotify);
 let figlet = require("figlet");
